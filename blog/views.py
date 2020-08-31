@@ -17,7 +17,7 @@ class SearchView(ListView):
         #result = super(SearchView, self).get_queryset()
         query = self.request.GET.get('search')
         if query:
-            postresult = Post.objects.filter(title__contains=query).order_by('-date_posted')
+            postresult = Post.objects.filter(title__icontains=query).order_by('-date_posted')
             result = postresult
         else:
             postresult = Post.objects.all().order_by('-date_posted')
