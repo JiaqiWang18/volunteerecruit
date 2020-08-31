@@ -82,3 +82,10 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
+.dropdown-item-checked::before {
+  position: absolute;
+  left: .4rem;
+  content: '✓';
+  font-weight: 600;
+}
