@@ -1,17 +1,12 @@
 {% extends "blog/base.html" %}
+
 {% block content %}
-     <div class="media">
-       <img class="rounded-circle account-img" src={{ profile_image_url }}>
-       <div class="media-body">
-         <h2 class="account-heading">{{ view.kwargs.username }}</h2>
-           <h4 class = "text-secondary">{{ first_name }} {{ last_name }}</h4>
-         <p class="text-secondary">{{ email }}</p>
-       </div>
-     </div>
-    <br>
-    <h3 class="mb-3">Post ({{ page_obj.paginator.count }})</h3>
-    {% for post in posts %}
-        <article class="media content-section">
+    <form class="form-inline mb-3" method="GET" action="" >
+        <input class="form-control mr-sm-2" id = "searchbar" type="search" name="search">
+        <button class="btn btn btn-outline-info my-2 my-sm-0" type="submit"> Search </button>
+    </form>
+    {% for post in all_search_results %}
+         <article class="media content-section">
           <img class = "rounded-circle article-img" src="{{ post.author.profile.image.url }}">
           <div class="media-body">
             <div class="article-metadata">
@@ -22,8 +17,10 @@
             <p class="article-content">{{ post.content|truncatewords:20 }}</p>
           </div>
         </article>
+    {% empty %}
+        <h2>No results found</h2>
     {% endfor %}
-    {% if is_paginated %}
+  {% if is_paginated %}
         {% if page_obj.has_previous %}
             <a class = "btn btn-outline-info mb-4" href="?page=1">First</a>
             <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
@@ -42,4 +39,7 @@
                 <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
          {% endif %}
     {% endif %}
-{% endblock content %}
+    <script type="text/javascript">
+        document.getElementById('searchbar').value = "{{request.GET.search}}"
+    </script>
+{% endblock %}

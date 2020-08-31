@@ -4,15 +4,35 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.models import User
 from .models import Post
 
-#views
+#blog app views
 
 #home post view
+class SearchView(ListView):
+    model = Post
+    template_name = 'blog/post_search.html'
+    context_object_name = 'all_search_results'
+    paginate_by = 5
+
+    def get_queryset(self):
+        #result = super(SearchView, self).get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+            postresult = Post.objects.filter(title__contains=query).order_by('-date_posted')
+            result = postresult
+        else:
+            postresult = Post.objects.all().order_by('-date_posted')
+            result = postresult
+        return result
+#home without search
+'''
 class PostListView(ListView):
     model = Post
     template_name = 'blog/home.html' #convention: <app>/<model>_<viewtype>.html
     context_object_name = 'posts' #convention: use object.xxx
     ordering = ['-date_posted']
     paginate_by = 5
+'''
+
 
 #user post list view
 class UserPostListView(ListView):
@@ -22,8 +42,18 @@ class UserPostListView(ListView):
     paginate_by = 5
     #get posts with that specific user
     def get_queryset(self):
-        user=get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
+        post_user=get_object_or_404(User, username=self.kwargs.get('username'))
+        print(post_user.first_name)
+        return Post.objects.filter(author=post_user).order_by('-date_posted')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post_user = get_object_or_404(User, username=self.kwargs.get('username'))
+        context["first_name"] = post_user.first_name
+        context["last_name"] = post_user.last_name
+        context["email"] = post_user.email
+        context["profile_image_url"] = post_user.profile.image.url
+        return context
 
 #each post view
 class PostDetailView(DetailView):
@@ -68,3 +98,4 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
 #about page
 def about(request):
     return render(request, 'blog/about.html',{'title':'about'})
+
