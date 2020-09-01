@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
 from .models import Post
-
+from .forms import CreatePost
+from users.models import Profile
 #blog app views
 
 #home post view
@@ -62,16 +63,31 @@ class PostDetailView(DetailView):
 #create post view
 class PostCreateView(LoginRequiredMixin,CreateView): #mixin to avoid log in
     model = Post
-    fields = ['title','content']
+    fields = ['title','content','attachment']
 
     def form_valid(self, form):
+
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+def create_post(request):
+    if request.method == 'POST':
+        form = CreatePost(request.POST, request.FILES)
+        if form.is_valid():
+            # file is saved
+            form.instance.author = request.user
+            print(request.FILES)
+            form.save()
+            return redirect('blog-home')
+    else:
+        form = CreatePost()
+    return render(request, 'blog/post_form.html', {'form': form})
+
 
 #update post view
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin to avoid one user able to update post of another
     model = Post
-    fields = ['title','content']
+    fields = ['title','content',"attachment"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

@@ -8,6 +8,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
+    attachment = models.FileField(upload_to='attachment', blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE) #delete post when user get deleted
 
     def __str__(self):

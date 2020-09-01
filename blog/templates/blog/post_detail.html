@@ -15,6 +15,10 @@
         </div>
         <h2 class="article-title">{{ object.title }}</h2>
         <p class="article-content">{{ object.content }}</p>
+        {% if object.attachment %}
+              <p>Attachment: <a href="{{ object.attachment.url }}">{{object.attachment}}</a></p>
+        {% endif %}
+
       </div>
     </article>
 {% endblock content %}
