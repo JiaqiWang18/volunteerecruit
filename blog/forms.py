@@ -6,5 +6,5 @@ class CreatePost(forms.ModelForm):
     class Meta:
         # nested config, model is the User model, fields are the ones in the form
         model = Post
-        fields = ['title','content','attachment']
+        fields = ['title','content','thumbnail','attachment']
 

@@ -1,39 +1,68 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-   <div class="content-section">
-     <div class="media">
-       <img class="rounded-circle account-img" src={{ user.profile.image.url }}>
-       <div class="media-body">
-         <h2 class="account-heading">{{ user.username }}</h2>
-           <h4 class = "text-secondary">{{ user.first_name }} {{ user.last_name }}</h4>
-         <p class="text-secondary">{{ user.email }}</p>
-       </div>
-     </div>
-     <form method="post" enctype="multipart/form-data">
-         {% csrf_token %}
-         <fieldset class = "form-group">
-             <legend class = "border-bottom">Profile Info</legend>
-             {{ u_form|crispy }}
-             {{ p_form|crispy }}
-         </fieldset>
-         <div class = "form-group">
-             <button class = "btn btn-outline-info" type="submit">Update</button>
-         </div>
-     </form>
-    <br>
-    <legend class = "border-bottom mt-3">My Posts</legend>
-   {% for post in my_posts %}
-    <article class="media content-section">
-      <img class = "rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-      <div class="media-body">
-        <div class="article-metadata">
-          <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+<div class="content-section">
+    <div class="media">
+        <img class="rounded-circle account-img" src={{ user.profile.image.url }}>
+        <div class="media-body">
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4>
+            <p class="text-secondary">{{ user.email }}</p>
         </div>
-        <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-        <p class="article-content">{{ post.content|truncatewords:20 }}</p>
-      </div>
-    </article>
-    {% endfor %}
-   </div>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom">Profile Info</legend>
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
+    <br>
+    {% if page_obj.count > 0 %}
+        <legend class="border-bottom mt-3">My Posts</legend>
+    {% endif %}
+    {% for post in page_obj %}
+    <div class="card mb-4">
+        {% if post.thumbnail %}
+        <div class="">
+            <img class="card-img-top" style="height:200px;object-fit: cover;" src="{{ post.thumbnail.url }}"
+                 alt="Card image cap">
+        </div>
+        {% endif %}
+        <div class="card-body">
+            <h2 class="card-title">{{post.title}}</h2>
+            <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+            <a href="{% url 'post-detail' post.id %}" class="btn btn-secondary">Edit</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ post.date_posted|date:"F d, Y" }}
+        </div>
+    </div>
+
+{% endfor %}
+    {% if page_obj.paginator.num_pages > 1 %}
+        {% if page_obj.has_previous %}
+            <a class = "btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class = "btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
+                <a class = "btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+         {% if page_obj.has_next %}
+                <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+         {% endif %}
+    {% endif %}
+</div>
+
 {% endblock content %}

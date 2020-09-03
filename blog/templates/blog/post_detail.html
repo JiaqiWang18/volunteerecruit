@@ -1,6 +1,35 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <article class="media content-section">
+<div class="card mb-4">
+    {% if post.thumbnail %}
+    <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="Card image cap">
+    {% endif %}
+    <div class="card-body">
+            <legend class="border-bottom mt-3"></legend>
+            <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+            <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+            {% if object.author == user %}
+            <div>
+                <br>
+                <a class="btn btn-secondary btn-sm mt-1 mt-2" href="{% url 'post-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mt-2" href="{% url 'post-delete' object.id %}">Delete</a>
+            </div>
+            {% endif %}
+        <legend class="border-bottom mt-3"></legend>
+        <h2 class="card-title">{{object.title}}</h2>
+        <p class="card-text">{{ object.content}}</p>
+    </div>
+    {% if object.attachment %}
+    <p class="ml-3">Attachment: <a href="{{ object.attachment.url }}">{{object.attachment}}</a></p>
+    {% endif %}
+</div>
+
+
+{% endblock content %}
+<!---
+
+  <article class="media content-section">
       <img class = "rounded-circle article-img" src="{{ object.author.profile.image.url }}">
       <div class="media-body">
         <div class="article-metadata">
@@ -21,4 +50,4 @@
 
       </div>
     </article>
-{% endblock content %}
+--->

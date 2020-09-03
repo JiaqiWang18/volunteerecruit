@@ -63,7 +63,7 @@ class PostDetailView(DetailView):
 #create post view
 class PostCreateView(LoginRequiredMixin,CreateView): #mixin to avoid log in
     model = Post
-    fields = ['title','content','attachment']
+    fields = ['title','content','thumbnail','attachment']
 
     def form_valid(self, form):
 
@@ -87,7 +87,7 @@ def create_post(request):
 #update post view
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin to avoid one user able to update post of another
     model = Post
-    fields = ['title','content',"attachment"]
+    fields = ['title','content',"thumbnail","attachment"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from blog.models import Post
+from django.core.paginator import Paginator
 
 # register form view
 def register(request):
@@ -34,6 +35,11 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    context = {"u_form":u_form, "p_form":p_form, "my_posts": Post.objects.filter(author=request.user)}
+    contact_list = Post.objects.filter(author=request.user).order_by('-date_posted')
+    paginator = Paginator(contact_list, 5)  # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {"u_form":u_form, "p_form":p_form, "page_obj":page_obj}
 
     return render(request,'users/profile.html',context)

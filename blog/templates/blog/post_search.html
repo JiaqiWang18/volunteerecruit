@@ -8,7 +8,28 @@
         <button class="btn btn btn-outline-info my-2 my-sm-0" type="submit"> Search </button>
     </form>
     {% for post in all_search_results %}
+
+      <div class="card mb-4">
+        {% if post.thumbnail %}
+          <div class="">
+          <img class="card-img-top" style="height:200px;object-fit: cover;" src="{{ post.thumbnail.url }}" alt="Card image cap">
+          </div>
+        {% endif %}
+          <div class="card-body">
+            <h2 class="card-title">{{post.title}}</h2>
+            <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+            <a href="{% url 'post-detail' post.id %}" class="btn btn-primary">Read More →</a>
+          </div>
+          <div class="card-footer text-muted">
+            {{ post.date_posted|date:"F d, Y" }} by
+            <a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+          </div>
+        </div>
+        <!---
          <article class="media content-section">
+          {% if post.thumbnail %}
+             <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Responsive image">
+          {% endif %}
           <img class = "rounded-circle article-img" src="{{ post.author.profile.image.url }}">
           <div class="media-body">
             <div class="article-metadata">
@@ -18,7 +39,7 @@
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content|truncatewords:20 }}</p>
           </div>
-        </article>
+        </article> --->
     {% empty %}
         <h2>No results found</h2>
     {% endfor %}
