@@ -4,7 +4,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.models import User
 from .models import Post
 from .forms import CreatePost
-from users.models import Profile
 #blog app views
 
 #home post view
@@ -53,6 +52,7 @@ class UserPostListView(ListView):
         context["first_name"] = post_user.first_name
         context["last_name"] = post_user.last_name
         context["email"] = post_user.email
+        context["bio"] = post_user.profile.bio
         context["profile_image_url"] = post_user.profile.image.url
         return context
 

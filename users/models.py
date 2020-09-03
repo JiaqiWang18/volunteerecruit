@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     # add other rleative fields
     user = models.OneToOneField(User,on_delete=models.CASCADE) #relate profile to the user
+    bio = models.CharField(max_length=100,blank=True)
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')
 
     def __str__(self):
