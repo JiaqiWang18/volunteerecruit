@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
 from .models import Post
@@ -61,6 +62,7 @@ class PostDetailView(DetailView):
     model = Post
 
 #create post view
+'''
 class PostCreateView(LoginRequiredMixin,CreateView): #mixin to avoid log in
     model = Post
     fields = ['title','content','thumbnail','attachment','address']
@@ -70,6 +72,8 @@ class PostCreateView(LoginRequiredMixin,CreateView): #mixin to avoid log in
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+'''
+@login_required
 def create_post(request):
     if request.method == 'POST':
         form = CreatePost(request.POST, request.FILES)
@@ -87,7 +91,7 @@ def create_post(request):
 #update post view
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin to avoid one user able to update post of another
     model = Post
-    fields = ['title','content',"thumbnail","attachment"]
+    fields = ['title','organization','content','email','phone',"thumbnail","attachment"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

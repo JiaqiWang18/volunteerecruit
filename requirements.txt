@@ -22,3 +22,4 @@ urllib3
 whitenoise
 django-cleanup
 django-address
+django-phone-field
