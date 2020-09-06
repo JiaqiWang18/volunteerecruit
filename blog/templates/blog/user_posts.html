@@ -10,7 +10,7 @@
        </div>
      </div>
     <br>
-    <h3 class="mb-3">Post ({{ page_obj.paginator.count }})</h3>
+    <h3 class="mb-3">Recruitments ({{ page_obj.paginator.count }})</h3>
     {% for post in posts %}
         <div class="card mb-4">
         {% if post.thumbnail %}
@@ -21,7 +21,7 @@
           <div class="card-body">
             <h2 class="card-title">{{post.title}}</h2>
             <p class="card-text">{{ post.content|truncatewords:20 }}</p>
-            <a href="{% url 'post-detail' post.id %}" class="btn btn-primary">Read More →</a>
+            <a href="{% url 'post-detail' post.id %}" class="btn btn-secondary bg-orange">More Info→</a>
           </div>
             <div class="card-footer text-muted">
             {{ post.date_posted|date:"F d, Y" }}

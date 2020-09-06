@@ -1,5 +1,5 @@
 body {
-  background: #fafafa;
+  background:white;
   color: #333333;
   margin-top: 5rem;
 }
@@ -12,16 +12,25 @@ ul {
   margin: 0;
 }
 
-.bg-steel {
-  background-color: #5f788a;
+.bg-orange {
+  background-color:  #ff9900;
 }
 
-.site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+.ft-orange {
+  background-color:  #ff8000;
+}
+
+ .site-header .navbar-nav .nav-link {
+  color: #ffffff;
+  font-size:15px;
+}
+
+.brandsize{
+  font-size:25px;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+  color:  #ebebe0;
 }
 
 .site-header .navbar-nav .nav-link.active {
@@ -122,3 +131,7 @@ a.article-title:hover {
     min-width: 100%;
 }
 
+
+footer{
+    background:
+}
