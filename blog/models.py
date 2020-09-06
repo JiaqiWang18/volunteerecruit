@@ -12,7 +12,6 @@ class Post(models.Model):
     thumbnail = models.ImageField(upload_to='post_thumbnails',blank=True)
     attachment = models.FileField(upload_to='attachment', blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE) #delete post when user get deleted
-
     def __str__(self):
         return self.title
 

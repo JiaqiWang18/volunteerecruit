@@ -21,3 +21,4 @@ six
 urllib3
 whitenoise
 django-cleanup
+django-address

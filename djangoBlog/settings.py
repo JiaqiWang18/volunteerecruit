@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages'
+    'storages',
+    'address'
 ]
 
 MIDDLEWARE = [
@@ -147,5 +148,7 @@ AWS_STORAGE_BUCKET_NAME=os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_FILE_OVERWRITE=False
 DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
 
+#google maps
+GOOGLE_API_KEY = os.environ.get("GOOGLE_MAP_API_KEY")
 # Activate Django-Heroku.
 django_heroku.settings(locals())

@@ -63,7 +63,7 @@ class PostDetailView(DetailView):
 #create post view
 class PostCreateView(LoginRequiredMixin,CreateView): #mixin to avoid log in
     model = Post
-    fields = ['title','content','thumbnail','attachment']
+    fields = ['title','content','thumbnail','attachment','address']
 
     def form_valid(self, form):
 
