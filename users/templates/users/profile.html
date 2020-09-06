@@ -22,8 +22,8 @@
         </div>
     </form>
     <br>
-    {% if page_obj.count > 0 %}
-        <legend class="border-bottom mt-3">My Recruitments</legend>
+    {% if page_obj.paginator.count > 0  %}
+        <legend class="border-bottom mt-3">My Recruitments ({{page_obj.paginator.count}})</legend>
     {% endif %}
     {% for post in page_obj %}
     <div class="card mb-4">
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-{% endfor %}
+    {% endfor %}
     {% if page_obj.paginator.num_pages > 1 %}
         {% if page_obj.has_previous %}
             <a class = "btn btn-outline-info mb-4" href="?page=1">First</a>

@@ -16,7 +16,7 @@ class Post(models.Model):
     attachment = models.FileField(upload_to='attachment', blank=True, help_text="Other attachment (optional)")
     author = models.ForeignKey(User, on_delete=models.CASCADE) #delete post when user get deleted
     phone = PhoneField(help_text='Contact phone number',null= True)
-    email = models.EmailField(max_length=70,null= True, unique= True,help_text="Contact email address")
+    email = models.EmailField(max_length=70,null= True,help_text="Contact email address")
 
     def __str__(self):
         return self.title
