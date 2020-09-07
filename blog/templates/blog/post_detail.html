@@ -15,8 +15,8 @@
         <legend class="border-bottom mt-3"></legend>
         <h2 class="card-title">{{object.title}}</h2>
         <p class="card-text">{{ object.content}}</p>
-        <legend class="border-bottom mt-3"></legend>
          {% if post.thumbnail %}
+            <legend class="border-bottom mt-3"></legend>
             <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="Card image cap">
         {% endif %}
         <legend class="border-bottom mt-3"></legend>

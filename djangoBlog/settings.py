@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'address',
-    'phone_field'
+    'phone_field',
+    'django_cleanup.apps.CleanupConfig'
 ]
 
 MIDDLEWARE = [
