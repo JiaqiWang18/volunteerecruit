@@ -21,7 +21,6 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '_^)=l=fpv-@!vv4-2bc4@xe#+a74$zevu4p8*%ngf2sg_s%j*a'
 SECRET_KEY=os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -45,7 +44,8 @@ INSTALLED_APPS = [
     'storages',
     'address',
     'phone_field',
-    'django_cleanup.apps.CleanupConfig'
+    'django_cleanup.apps.CleanupConfig',
+    'localflavor'
 ]
 
 MIDDLEWARE = [

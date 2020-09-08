@@ -17,6 +17,7 @@
         {% endif %}
           <div class="card-body">
             <h2 class="card-title">{{post.title}}</h2>
+            <h2 id = "debugger"></h2>
             <p class="card-text">{{ post.content|truncatewords:20 }}</p>
             <a href="{% url 'post-detail' post.id %}" class="btn btn-secondary bg-orange">More Info→</a>
           </div>
@@ -50,5 +51,6 @@
     {% endif %}
     <script type="text/javascript">
         document.getElementById('searchbar').value = "{{request.GET.search}}"
+        //document.getElementById('debugger').innerHTML = "{{ all_search_results }}"
     </script>
 {% endblock %}

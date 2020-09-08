@@ -23,3 +23,5 @@ whitenoise
 django-cleanup
 django-address
 django-phone-field
+django-countries
+django-localflavor

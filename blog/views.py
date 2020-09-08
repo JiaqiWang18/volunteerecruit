@@ -91,7 +91,7 @@ def create_post(request):
 #update post view
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin to avoid one user able to update post of another
     model = Post
-    fields = ['title','organization','content','email','phone',"thumbnail","attachment"]
+    fields = ['title', 'organization', 'content', 'email', 'phone', 'address', 'city', 'state', 'zip', 'thumbnail', 'attachment']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

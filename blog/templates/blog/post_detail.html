@@ -19,12 +19,27 @@
             <legend class="border-bottom mt-3"></legend>
             <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="Card image cap">
         {% endif %}
-        <legend class="border-bottom mt-3"></legend>
-        <h5 class="card-title">Contact Info: </h5>
-        <p class="card-text">{{ object.author.first_name}} {{ object.author.last_name}}</p>
-        <p class="card-text">{{ object.organization}}</p>
-        <p class="card-text">{{ object.phone}}</p>
-        <p class="card-text">{{ object.email}}</p>
+        <div class="row">
+            <div class="col">
+              <div class="content-section">
+                    <h5 class="card-title">Contact Info: </h5>
+                    <p class="card-text" >{{ object.author.first_name}} {{ object.author.last_name}}</p>
+                    <p class="card-text">{{ object.organization}}</p>
+                    <p class="card-text">{{ object.phone}}</p>
+                    <p class="card-text">{{ object.email}}</p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="content-section">
+                    <h5 class="card-title">Contact Info: </h5>
+                    <p class="card-text" >{{ object.author.first_name}} {{ object.author.last_name}}</p>
+                    <p class="card-text">{{ object.organization}}</p>
+                    <p class="card-text">{{ object.phone}}</p>
+                    <p class="card-text">{{ object.email}}</p>
+              </div>
+            </div>
+            </div>
+        </div>
     </div>
     {% if object.attachment %}
     <legend class="border-bottom mt-3"></legend>
