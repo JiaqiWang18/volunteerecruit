@@ -15,36 +15,44 @@
         <legend class="border-bottom mt-3"></legend>
         <h2 class="card-title">{{object.title}}</h2>
         <p class="card-text">{{ object.content}}</p>
-         {% if post.thumbnail %}
-            <legend class="border-bottom mt-3"></legend>
-            <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="Card image cap">
+        {% if post.thumbnail %}
+        <legend class="border-bottom mt-3"></legend>
+        <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="Card image cap">
         {% endif %}
         <div class="row">
             <div class="col">
-              <div class="content-section">
+                <div class="content-section">
                     <h5 class="card-title">Contact Info: </h5>
-                    <p class="card-text" >{{ object.author.first_name}} {{ object.author.last_name}}</p>
+                    <p class="card-text">{{ object.author.first_name}} {{ object.author.last_name}}</p>
                     <p class="card-text">{{ object.organization}}</p>
                     <p class="card-text">{{ object.phone}}</p>
                     <p class="card-text">{{ object.email}}</p>
-              </div>
+                </div>
             </div>
             <div class="col">
-              <div class="content-section">
-                    <h5 class="card-title">Contact Info: </h5>
-                    <p class="card-text" >{{ object.author.first_name}} {{ object.author.last_name}}</p>
-                    <p class="card-text">{{ object.organization}}</p>
-                    <p class="card-text">{{ object.phone}}</p>
-                    <p class="card-text">{{ object.email}}</p>
-              </div>
-            </div>
+                <div class="content-section">
+                    <h5 class="card-title">Service Location: </h5>
+                    {% if object.address %}
+                    <p class="card-text">{{ object.address}}</p>
+                    {% endif %}
+                    {% if object.city %}
+                    <p class="card-text">{{ object.city}}</p>
+                    {% endif %}
+                    {% if object.state %}
+                    <p class="card-text">{{ object.state}}</p>
+                    {% endif %}
+                    {% if object.zip %}
+                    <p class="card-text">{{ object.zip}}</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-    {% if object.attachment %}
-    <legend class="border-bottom mt-3"></legend>
-    <p class="ml-3">Attachment: <a href="{{ object.attachment.url }}">{{object.attachment}}</a></p>
-    {% endif %}
+</div>
+{% if object.attachment %}
+<legend class="border-bottom mt-3"></legend>
+<p class="ml-3">Attachment: <a href="{{ object.attachment.url }}">{{object.attachment}}</a></p>
+{% endif %}
 </div>
 
 
