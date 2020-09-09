@@ -5,6 +5,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.models import User
 from .models import Post
 from .forms import CreatePost
+import requests
+import os
 #blog app views
 
 #home post view
@@ -94,7 +96,11 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin
     fields = ['title', 'organization', 'content', 'email', 'phone', 'address', 'city', 'state', 'zip', 'thumbnail', 'attachment']
 
     def form_valid(self, form):
+        #update lat and lng
         form.instance.author = self.request.user
+        current_address = f"{form.instance.address} {form.instance.city}, {form.instance.state}"
+        print(current_address)
+        form.instance.latitude,form.instance.longitude = self.geocode(current_address)
         return super().form_valid(form)
 
     def test_func(self):
@@ -102,6 +108,14 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin
         if self.request.user == post.author:
             return True
         return False
+
+    def geocode(self,address):
+        url = 'https://maps.googleapis.com/maps/api/geocode/json'
+        params = {'sensor': 'false', 'address': address, 'key': os.environ.get("GOOGLE_MAP_API_KEY")}
+        r = requests.get(url, params=params)
+        results = r.json()['results']
+        location = results[0]['geometry']['location']
+        return location['lat'], location['lng']
 
 #delete post view
 class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
