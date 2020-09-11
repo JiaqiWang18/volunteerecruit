@@ -180,7 +180,7 @@
                         infowindow = new google.maps.InfoWindow({
                             content: "<h4 class='text-muted'><a href='/post/"+  all_post[i]["pk"] + "/'>"
                                             +all_post[i]["fields"]["title"]+"</a></h4>"
-                                    +"<p>"+all_post[i]["fields"]["content"].substring(0,20)+"</p>"
+                                    +"<p>"+all_post[i]["fields"]["content"].substring(0,60)+"</p>"
                         });
                         infowindow.open(map, marker);
                     });
