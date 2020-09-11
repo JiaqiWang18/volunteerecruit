@@ -146,6 +146,9 @@ footer{
 main{
 padding-bottom: 12rem;
 }
+.col-width{
+    width: 70%;
+}
 
 #map {
     height: 300px;
@@ -153,3 +156,4 @@ padding-bottom: 12rem;
     width: 100%;
     /* The width is the width of the web page */
 }
+
