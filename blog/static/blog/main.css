@@ -133,7 +133,7 @@ a.article-title:hover {
     min-width: 100%;
 }
 .homecard{
-    width:85%;
+    width:100%;
 }
 
 footer{
@@ -145,4 +145,11 @@ footer{
 
 main{
 padding-bottom: 12rem;
+}
+
+#map {
+    height: 300px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
 }
