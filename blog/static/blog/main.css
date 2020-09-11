@@ -6,7 +6,10 @@
     .p-size{
         font-size:18px !important;
     }
-
+    .rounded-circle{
+        width:20% !important;
+        height:20% !important;
+    }
 
 }
 
