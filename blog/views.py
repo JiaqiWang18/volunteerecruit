@@ -113,6 +113,8 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin
         url = 'https://maps.googleapis.com/maps/api/geocode/json'
         params = {'sensor': 'false', 'address': address, 'key': os.environ.get("GOOGLE_MAP_API_KEY")}
         r = requests.get(url, params=params)
+        print(r.json())
+
         results = r.json()['results']
         location = results[0]['geometry']['location']
         return location['lat'], location['lng']

@@ -38,6 +38,7 @@ class Post(models.Model):
         params = {'sensor': 'false', 'address': address, 'key': os.environ.get("GOOGLE_MAP_API_KEY")}
         r = requests.get(url, params=params)
         results = r.json()['results']
+        print(results)
         location = results[0]['geometry']['location']
         return location['lat'], location['lng']
 
