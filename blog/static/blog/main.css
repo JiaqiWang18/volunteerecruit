@@ -3,6 +3,11 @@
     .col-width{
         width: 100% !important;
     }
+    .p-size{
+        font-size:18px !important;
+    }
+
+
 }
 
 body {
