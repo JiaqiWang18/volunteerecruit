@@ -3,8 +3,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
+from django.forms.models import modelform_factory
 from .models import Post
-from .forms import CreatePost
+from .forms import CreatePost, DateTime
 import requests
 import os
 #blog app views
@@ -93,7 +94,9 @@ def create_post(request):
 #update post view
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin to avoid one user able to update post of another
     model = Post
-    fields = ['title', 'organization', 'content', 'email', 'phone', 'address', 'city', 'state', 'zip', 'thumbnail', 'attachment']
+    form_class = modelform_factory(Post,
+    fields = ['title', 'organization', 'content', 'start_time','end_time','email', 'phone', 'address', 'city', 'state', 'zip', 'thumbnail', 'attachment'],
+    widgets={"start_time": DateTime(),"end_time": DateTime()})
 
     def form_valid(self, form):
         #update lat and lng
@@ -113,7 +116,6 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin
         url = 'https://maps.googleapis.com/maps/api/geocode/json'
         params = {'sensor': 'false', 'address': address, 'key': os.environ.get("GOOGLE_MAP_API_KEY")}
         r = requests.get(url, params=params)
-        print(r.json())
 
         results = r.json()['results']
         location = results[0]['geometry']['location']

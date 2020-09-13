@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'address',
     'phone_field',
     'django_cleanup.apps.CleanupConfig',
-    'localflavor'
+    'localflavor',
 ]
 
 MIDDLEWARE = [
@@ -152,5 +152,6 @@ DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
 
 #google maps
 GOOGLE_API_KEY = os.environ.get("GOOGLE_MAP_API_KEY")
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())

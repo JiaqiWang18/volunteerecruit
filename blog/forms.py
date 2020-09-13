@@ -1,10 +1,16 @@
 from django import forms
 from .models import Post
-# create customized user registration form that inherits from the usercreationform and interacts with the User model
+
+class DateTime(forms.DateTimeInput):
+    input_type = "datetime-local"
+
 
 class CreatePost(forms.ModelForm):
     class Meta:
-        # nested config, model is the User model, fields are the ones in the form
         model = Post
-        fields = ['title','organization','content','email','phone','address','city','state','zip','thumbnail','attachment']
+        fields = ['title','organization','content','start_time','end_time','email','phone','address','city','state','zip','thumbnail','attachment']
+        widgets = {
+            'start_time': DateTime(),
+            'end_time': DateTime()
+        }
 

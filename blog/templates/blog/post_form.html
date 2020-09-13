@@ -1,6 +1,7 @@
 {% extends "blog/base.html" %}
-{{ form.media }} <!-- needed for JS/GoogleMaps lookup -->
 {% load crispy_forms_tags %}
+{{ form.media }}
+
 {% block content %}
     <div class = "content-section col-width">
         <form method="post" enctype="multipart/form-data">
@@ -10,6 +11,7 @@
                     Recruitment
                 </legend>
                 {{ form|crispy }}
+                <div id = "datetimeselector"></div>
             </fieldset>
             <div class = "form-group">
                 <button class = "btn btn-outline-info" type="submit">Post Recruitment!</button>

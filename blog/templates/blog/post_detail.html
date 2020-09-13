@@ -29,6 +29,15 @@
         <div class="row">
             <div class="col">
                 <div class="content-section">
+                    <h5 class="card-title">Service Time</h5>
+                    <p class="card-text">Start: {{ object.start_time}}</p>
+                    <p class="card-text">End: {{ object.end_time}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="content-section">
                     <h5 class="card-title">Contact Info: </h5>
                     <p class="card-text">{{ object.author.first_name}} {{ object.author.last_name}}</p>
                     <p class="card-text">{{ object.organization}}</p>

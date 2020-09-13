@@ -13,13 +13,17 @@ class Post(models.Model):
     organization = models.CharField(max_length=100,blank=True, help_text='Name of your organization (optional)')
     content = models.TextField(verbose_name="Description")
     date_posted = models.DateTimeField(default=timezone.now)
-    thumbnail = models.ImageField(upload_to='post_thumbnails',blank=True, help_text="Attach a flyer (optional)")
+
+    thumbnail = models.ImageField(upload_to='post_thumbnails',blank=True, verbose_name="Flyer",help_text="Attach a flyer (optional)")
     attachment = models.FileField(upload_to='attachment', blank=True, help_text="Other attachment (optional)")
     author = models.ForeignKey(User, on_delete=models.CASCADE) #delete post when user get deleted
     phone = PhoneField(help_text='Contact phone number',null= True)
     email = models.EmailField(max_length=70,null= True,help_text="Contact email address")
 
-    address = models.CharField(max_length=150, help_text="Location of this activity (optional)")
+    start_time = models.DateTimeField(null=True, help_text="Event time")
+    end_time = models.DateTimeField(null=True)
+
+    address = models.CharField(max_length=150, help_text="Location of this activity")
     city = models.CharField(max_length=150)
     state = USStateField()
     zip = USZipCodeField()
