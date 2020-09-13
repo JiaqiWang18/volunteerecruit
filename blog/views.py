@@ -94,9 +94,11 @@ def create_post(request):
 #update post view
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin to avoid one user able to update post of another
     model = Post
-    form_class = modelform_factory(Post,
-    fields = ['title', 'organization', 'content', 'start_time','end_time','email', 'phone', 'address', 'city', 'state', 'zip', 'thumbnail', 'attachment'],
-    widgets={"start_time": DateTime(),"end_time": DateTime()})
+    fields = ['title', 'organization', 'content', 'start_time', 'end_time', 'email', 'phone', 'address', 'city',
+              'state', 'zip', 'thumbnail', 'attachment']
+    #form_class = modelform_factory(Post,
+    #fields = ['title', 'organization', 'content', 'start_time','end_time','email', 'phone', 'address', 'city', 'state', 'zip', 'thumbnail', 'attachment'],
+    #widgets={"start_time": DateTime(),"end_time": DateTime()})
 
     def form_valid(self, form):
         #update lat and lng
