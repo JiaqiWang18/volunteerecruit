@@ -1,0 +1,55 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section col-width">
+    <legend class="border-bottom mt-2">
+         <div class="row  mb-2">
+            <div class="col-7 ml-3">
+               My Recruitments ({{page_obj.paginator.count}})
+            </div>
+            <div class="col" style="text-align:right;">
+                <a class="btn btn-success" style="color:white;" href="{% url 'post-create' %}"><b>New</b></a>
+            </div>
+        </div>
+    </legend>
+    {% for post in page_obj %}
+    <div class="card mb-4">
+        {% if post.thumbnail %}
+        <div class="">
+            <img class="card-img-top" style="height:200px;object-fit: cover;" src="{{ post.thumbnail.url }}"
+                 alt="Card image cap">
+        </div>
+        {% endif %}
+        <div class="card-body">
+            <h2 class="card-title">{{post.title}}</h2>
+            <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+            <a href="{% url 'post-detail' post.id %}" class="btn btn-secondary">View</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ post.date_posted|date:"F d, Y" }}
+        </div>
+    </div>
+
+    {% endfor %}
+    {% if page_obj.paginator.num_pages > 1 %}
+        {% if page_obj.has_previous %}
+            <a class = "btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class = "btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
+                <a class = "btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+         {% if page_obj.has_next %}
+                <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+         {% endif %}
+    {% endif %}
+</div>
+
+{% endblock content %}

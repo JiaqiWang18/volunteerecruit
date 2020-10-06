@@ -4,9 +4,7 @@
     <div class="col">
         <div class="card mb-4">
             <div class="card-body">
-
                 <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-
                 <legend class="border-bottom mt-3"></legend>
                 <h2 class="card-title">{{object.title}}</h2>
                 <p class="card-text">{{ object.content}}</p>
@@ -26,7 +24,6 @@
         </div>
     </div>
     <div class="col-md-4">
-
         <div class="row">
             <div class="col">
                 <div class="content-section">
@@ -52,16 +49,16 @@
                 <div class="content-section">
                     <h5 class="card-title">Service Location: </h5>
                     {% if object.address %}
-                    <p class="card-text">{{ object.address}}</p>
+                        <p class="card-text">{{ object.address}}</p>
                     {% endif %}
                     {% if object.city %}
-                    <p class="card-text">{{ object.city}}</p>
+                        <p class="card-text">{{ object.city}}</p>
                     {% endif %}
                     {% if object.state %}
-                    <p class="card-text">{{ object.state}}</p>
+                        <p class="card-text">{{ object.state}}</p>
                     {% endif %}
                     {% if object.zip %}
-                    <p class="card-text">{{ object.zip}}</p>
+                        <p class="card-text">{{ object.zip}}</p>
                     {% endif %}
                 </div>
             </div>
@@ -72,27 +69,28 @@
         <p class="ml-3">Attachment: <a href="{{ object.attachment.url }}">{{object.attachment}}</a></p>
         {% endif %}
     </div>
-
     {% if object.author == user %}
     <div class="col-md-3">
-            <div class="row">
-                <div class="col">
-                    <h5 class="card-title">Current Signups</h5>
-                        {% for signup in signups %}
-                            <div class="content-section">
-                                <p><b>{{signup.firstname}} {{signup.lastname}}</b></p>
-                                <p>{{signup.email}}</p>
-                                {% if signup.phone %}
-                                    {{signup.phone}}
-                                {% endif %}
-                                {% if signup.message %}
-                                <legend class="border-bottom mt-3"></legend>
-                                <p><b>Message</b>: {{ signup.message}}</p>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                </div>
+        <div class="row">
+            <div class="col">
+                <h5 class="card-title">Current Signups</h5>
+                {% for signup in signups %}
+                    <div class="content-section">
+                        <p>{{signup.firstname}} {{signup.lastname}}</p>
+                        <p>{{signup.email}}</p>
+                        {% if signup.phone %}
+                            {{signup.phone}}
+                        {% endif %}
+                        {% if signup.message %}
+                        <legend class="border-bottom mt-3"></legend>
+                        <p>Message: {{ signup.message}}</p>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <p>No signups yet...</p>
+                {% endfor %}
             </div>
+        </div>
     </div>
     {% endif %}
 </div>

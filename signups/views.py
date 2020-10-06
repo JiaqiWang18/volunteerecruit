@@ -13,4 +13,4 @@ def create_signup(request,pk):
             return redirect(f'/post/{pk}/')
     else:
         form = NewSignup()
-    return render(request, 'signups/signup.html', {'form': form})
+    return render(request, 'signups/signup.html', {'form': form, 'post_obj': Post.objects.get(id=pk)})
