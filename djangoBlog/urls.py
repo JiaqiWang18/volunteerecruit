@@ -19,6 +19,7 @@ from django.urls import path, include
 from users import views as user_views #import the created log in form views from the users app
 from django.conf.urls.static import static
 from django.conf import settings
+from signups.views import create_signup
 
 #project level routing
 urlpatterns = [
@@ -39,7 +40,10 @@ urlpatterns = [
          name="password_reset_complete"),
 
     #home page
-    path('', include('blog.urls')) #leave first param empty if home page is the path being routed to
+    path('', include('blog.urls')), #leave first param empty if home page is the path being routed to
+
+    #signups
+    path('signup/<int:pk>/',create_signup, name="new-signup")
 ]
 
 if settings.DEBUG:

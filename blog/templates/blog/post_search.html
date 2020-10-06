@@ -16,14 +16,10 @@
           </div>
         {% endif %}
           <div class="card-body">
-            <h2 class="card-title">{{post.title}}</h2>
+              <h2 class="card-title">{{post.title}}</h2>
             <h2 id = "debugger"></h2>
             <p class="card-text">{{ post.content|truncatewords:20 }}</p>
             <a href="{% url 'post-detail' post.id %}" class="btn btn-secondary bg-orange">More Info→</a>
-          </div>
-          <div class="card-footer text-muted">
-            {{ post.date_posted|date:"F d, Y" }} by
-            <a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
           </div>
         </div>
 

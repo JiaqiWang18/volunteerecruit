@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.models import User
 from django.forms.models import modelform_factory
 from .models import Post
+from signups.models import SignUp
 from .forms import CreatePost, DateTime
 import requests
 import os
@@ -63,6 +64,11 @@ class UserPostListView(ListView):
 #each post view
 class PostDetailView(DetailView):
     model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["signups"]= SignUp.objects.filter(post=self.get_object())
+        return context
 
 #create post view
 '''
