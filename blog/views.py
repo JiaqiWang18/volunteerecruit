@@ -88,7 +88,6 @@ def create_post(request):
         if form.is_valid():
             # file is saved
             form.instance.author = request.user
-            print(request.FILES)
             form.save()
             return redirect('blog-home')
     else:

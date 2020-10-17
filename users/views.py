@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from blog.models import Post
 from django.core.paginator import Paginator
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from signups.models import SignUp
+from blog.models import Post
 
 # register form view
 def register(request):
@@ -51,3 +52,14 @@ def manage_recruitments(request):
     context = {"page_obj":page_obj}
 
     return render(request,'users/manage_recruitments.html',context)
+
+@login_required
+def manage_signups(request):
+    contact_list = SignUp.objects.filter(author=request.user)
+    paginator = Paginator(contact_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {"page_obj":page_obj}
+
+    return render(request,'users/manage_signups.html',context)

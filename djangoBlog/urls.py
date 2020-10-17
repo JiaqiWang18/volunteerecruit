@@ -31,6 +31,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name= 'users/logout.html'), name="logout"),
     path('profile/', user_views.profile, name="profile"),
     path('recruitments/',user_views.manage_recruitments, name="my-recruitments"),
+    path('my-sign-ups/', user_views.manage_signups, name="my-signups"),
+
     #password reset
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), name="password_reset"),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),name="password_reset_done"),
@@ -43,7 +45,8 @@ urlpatterns = [
     path('', include('blog.urls')), #leave first param empty if home page is the path being routed to
 
     #signups
-    path('signup/<int:pk>/',create_signup, name="new-signup")
+    path('signup/<int:pk>/',create_signup, name="new-signup"),
+
 ]
 
 if settings.DEBUG:

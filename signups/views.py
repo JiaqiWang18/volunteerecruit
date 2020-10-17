@@ -7,10 +7,15 @@ from .forms import NewSignup
 from .models import Post
 import os
 
-# Create your views here.
 def create_signup(request,pk):
+    if (request.user.is_anonymous):
+        messages.warning(request, f"To better organize your sign ups, you can login or register for an account.")
+
     if request.method == 'POST':
         form = NewSignup(request.POST)
+        if (request.user.is_anonymous == False):
+            #link user obj with the sign ups
+            form.instance.author = request.user
         if form.is_valid():
             # file is saved
             form.instance.post = Post.objects.get(id=pk)
