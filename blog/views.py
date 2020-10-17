@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.models import User
-from django.forms.models import modelform_factory
 from .models import Post
 from signups.models import SignUp
-from .forms import CreatePost, DateTime
+from .forms import CreatePost
 import requests
 import os
 #blog app views

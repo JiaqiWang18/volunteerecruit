@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <p>You're receiving this email because you have made a volunteer sign up at <a href="volunteerecruit.herokuapp.com">volunteerecruit.herokuapp.com</a></p>
+    <p>Below are the information for your convenience</p>
+    <p>Event description: {{post_obj.content}}</p>
+    <p><strong>Recruiter contact info:</strong></p>
+    <p>{{post_obj.author.first_name}} {{post_obj.author.last_name}}</p>
+    <p>{{post_obj.phone}}</p>
+    <p>{{post_obj.email}}</p>
+    <p><strong>Location: </strong></p>
+    <p>Address: {{post_obj.address}}</p>
+    <p>City: {{post_obj.city}}</p>
+    <p>State: {{post_obj.state}}</p>
+    <p>Zip: {{post_obj.zip}}</p>
+    <p><strong>Time: </strong></p>
+    <p>Start: {{post_obj.start_time}}</p>
+    <p>End: {{post_obj.end_time}}</p>
+    <br>
+    <p>Thanks for using our site!</p>
+    <p>The <a href="volunteerecruit.herokuapp.com">volunteerecruit.herokuapp.com</a> team</p>
+</body>
+</html>
