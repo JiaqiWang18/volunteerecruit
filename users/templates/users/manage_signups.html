@@ -19,6 +19,9 @@
             {% if signup.message %}
                 <p class="card-title">Your message: {{signup.message}}</p>
             {% endif %}
+            <a class="btn btn-secondary" href="{% url 'update-signup' signup.id %}">Update</a>
+            <a class="btn btn-danger" href="{% url 'delete-signup' signup.id %}">Delete</a>
+
         </div>
     </div>
 

@@ -1,10 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.views.generic import DeleteView, UpdateView
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.utils.html import strip_tags
 from django.core.mail import send_mail
 from django.contrib import messages
 from .forms import NewSignup
-from .models import Post
+from .models import Post, SignUp
 import os
 
 def create_signup(request,pk):
@@ -28,3 +31,31 @@ def create_signup(request,pk):
     else:
         form = NewSignup()
     return render(request, 'signups/signup.html', {'form': form, 'post_obj': Post.objects.get(id=pk)})
+
+#delete signup view
+class SignupDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+    model = SignUp
+    success_url = reverse_lazy('my-signups') #redirect to sign up list
+
+    def test_func(self):
+        signup = self.get_object()
+        if self.request.user == signup.author:
+            return True
+        return False
+
+#update signup view
+
+class SignupUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView): #mixin to avoid one user able to update post of another
+    model = SignUp
+    fields = ["firstname", "lastname", "email", "phone", "message"]
+    success_url = reverse_lazy('my-signups') #redirect to sign up list
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        signup = self.get_object()
+        if self.request.user == signup.author:
+            return True
+        return False

@@ -19,7 +19,7 @@ from django.urls import path, include
 from users import views as user_views #import the created log in form views from the users app
 from django.conf.urls.static import static
 from django.conf import settings
-from signups.views import create_signup
+from signups.views import create_signup, SignupDeleteView, SignupUpdateView
 
 #project level routing
 urlpatterns = [
@@ -46,6 +46,8 @@ urlpatterns = [
 
     #signups
     path('signup/<int:pk>/',create_signup, name="new-signup"),
+    path('delete-signup/<int:pk>/', SignupDeleteView.as_view(), name="delete-signup"),
+    path('update-signup/<int:pk>/', SignupUpdateView.as_view(), name="update-signup"),
 
 ]
 
