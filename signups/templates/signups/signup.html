@@ -8,13 +8,13 @@
             {% csrf_token %}
             <fieldset class = "form-group">
                 <legend class = "border-bottom">
-                   New Signup for "{{post_obj.title}}"
+                   New Registration for "{{post_obj.title}}"
                 </legend>
                 {{ form|crispy }}
                 <div id = "datetimeselector"></div>
             </fieldset>
             <div class = "form-group">
-                <button class = "btn btn-outline-info" type="submit">Sign up</button>
+                <button class = "btn btn-outline-info" type="submit">Register</button>
             </div>
         </form>
     </div>

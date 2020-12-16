@@ -5,14 +5,14 @@
     <legend class="border-bottom mt-2">
          <div class="row  mb-2">
             <div class="col-7 ml-3">
-               My Sign Ups ({{page_obj.paginator.count}})
+               My Registrations ({{page_obj.paginator.count}})
             </div>
         </div>
     </legend>
     {% for signup in page_obj %}
     <div class="card mb-4">
         <div class="card-body">
-            <h3>Sign up for: <a href="{% url 'post-detail' signup.post.id %}">{{signup.post.title}}</a></h3>
+            <h3>Registration for: <a href="{% url 'post-detail' signup.post.id %}">{{signup.post.title}}</a></h3>
             <p class="card-title">Name: {{signup.firstname}} {{signup.lastname}}</p>
             <p class="card-title">Email: {{signup.email}}</p>
             <p class="card-title">Phone: {{signup.phone}}</p>

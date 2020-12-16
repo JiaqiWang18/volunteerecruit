@@ -73,7 +73,7 @@
     <div class="col-md-3">
         <div class="row">
             <div class="col">
-                <h5 class="card-title">Current Signups</h5>
+                <h5 class="card-title">Registered Volunteers</h5>
                 {% for signup in signups %}
                     <div class="content-section">
                         <p>{{signup.firstname}} {{signup.lastname}}</p>
@@ -87,7 +87,7 @@
                         {% endif %}
                     </div>
                 {% empty %}
-                    <p>No signups yet...</p>
+                    <p>No one registered yet...</p>
                 {% endfor %}
             </div>
         </div>

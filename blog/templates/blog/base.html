@@ -13,9 +13,9 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
     {% if title%}
-    <title>Volunteer Recruit - {{title}}</title>
+    <title>Volunteerecruit - {{title}}</title>
     {% else %}
-    <title>Volunteer Recruit</title>
+    <title>Volunteerecruit</title>
     {% endif %}
 </head>
 
@@ -35,7 +35,7 @@
                     <div class="navbar-nav">
                         {% if user.is_authenticated %}
                         <a class="nav-item nav-link" href="{% url 'my-recruitments' %}">My Recruitments</a>
-                        <a class="nav-item nav-link" href="{% url 'my-signups' %}">My Sign ups</a>
+                        <a class="nav-item nav-link" href="{% url 'my-signups' %}">My Registrations</a>
                         <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                             {% if user.is_superuser or user.is_staff %}
                             <a class="nav-item nav-link" href="{% url 'admin:index' %}">Admin Site</a>
