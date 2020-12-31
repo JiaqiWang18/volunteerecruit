@@ -109,7 +109,6 @@
     +"&location={{object.address}}+{{object.city}}+{{object.state}}+{{object.zip}}"
 
     gclk = gclk.replace(/\s/g, '+')
-    console.log(gclk)
     document.getElementById("gc_target").innerHTML = ` <div class="col-sm">
                         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
                     </div>        
@@ -123,7 +122,6 @@
             var output = "";
             var months = [ "Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.", "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec." ];
             time = time.split(" ");
-            console.log(time)
             var outMonth = (months.indexOf(time[0])+1).toString()
             var outDay = time[1].replace(",","")
             var outTime = time[3].replace(":","")
@@ -137,7 +135,6 @@
                 outTime = parseInt(outTime)+1200
             }
             output += time[2].replace(",","")+outMonth+outDay+"T"+outTime
-            console.log(output)
             return output;
         }catch(err){
             return ""
