@@ -1,10 +1,13 @@
 {% extends "blog/base.html" %}
+{% load static %}
 {% block content %}
 <div class="row">
     <div class="col">
         <div class="card mb-4">
             <div class="card-body">
-                <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+                <div class="row" id = "gc_target">
+                    
+                </div>
                 <legend class="border-bottom mt-3"></legend>
                 <h2 class="card-title">{{object.title}}</h2>
                 <p class="card-text">{{ object.content}}</p>
@@ -94,8 +97,51 @@
     </div>
     {% endif %}
 </div>
+<script>
+    dj_sdate = "{{object.start_time}}"
+    dj_edate = "{{object.end_time}}"
+    var city = "{{object.city}}".split(" ")[0]
+    var gclk = "https://calendar.google.com/calendar/u/0/r/eventedit?text={{object.title}}&dates=" 
+    + convertTime(dj_sdate) 
+    + "/" + convertTime(dj_edate) 
+    +"&details=For more details click: " + window.location.href
+    +"&location={{object.address}}+{{object.city}}+{{object.state}}+{{object.zip}}"
 
-</div>
-
-
+    gclk = gclk.replace(/\s/g, '+')
+    console.log(gclk)
+    document.getElementById("gc_target").innerHTML = ` <div class="col-sm">
+                        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+                    </div>        
+    <div class="col-sm">
+                                                            <div  style="text-align:right;">
+                                                                <a class="btn btn-primary" href = `+ gclk +`>Add to calendar</a>
+                                                            </div>
+                                                        </div>`
+    function convertTime(time){
+        try{
+            var output = "";
+            var months = [ "Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.", "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec." ];
+            time = time.split(" ");
+            console.log(time)
+            var outMonth = (months.indexOf(time[0])+1).toString()
+            var outDay = time[1].replace(",","")
+            var outTime = time[3].replace(":","")
+            if(outMonth.length == 1){
+                outMonth = "0"+outMonth;
+            }
+            if(outDay.length == 1){
+                outDay = "0"+outDay;
+            }
+            if(time[4].includes("p")){
+                outTime = parseInt(outTime)+1200
+            }
+            output += time[2].replace(",","")+outMonth+outDay+"T"+outTime
+            console.log(output)
+            return output;
+        }catch(err){
+            return ""
+        }
+        
+    }
+</script>
 {% endblock content %}
