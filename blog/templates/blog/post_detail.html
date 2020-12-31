@@ -20,8 +20,9 @@
                     {% if object.author == user %}
                         <a class="btn btn-secondary" href="{% url 'post-update' object.id %}">Update</a>
                         <a class="btn btn-danger" href="{% url 'post-delete' object.id %}">Delete</a>
+                    {% else %}
+                        <a class="btn btn-success" href="{% url 'new-signup' post.id %}">Register</a>
                     {% endif %}
-                    <a class="btn btn-success" href="{% url 'new-signup' post.id %}">Register</a>
                 </div>
             </div>
         </div>
