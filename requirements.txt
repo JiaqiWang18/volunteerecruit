@@ -15,7 +15,7 @@ Pillow
 psycopg2
 python-dateutil
 pytz
-requests
+requests~=2.26.0
 s3transfer
 six
 urllib3
@@ -25,3 +25,5 @@ django-address
 django-phone-field
 django-countries
 django-localflavor
+
+celery~=5.1.2

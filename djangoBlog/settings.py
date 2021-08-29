@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'phone_field',
     'django_cleanup.apps.CleanupConfig',
     'localflavor',
+    'djcelery_email'
 ]
 
 MIDDLEWARE = [
